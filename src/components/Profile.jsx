@@ -16,10 +16,10 @@ const Profile = () => {
       <div>
         new post
       </div>
-      <div>
+      <div className="item">
         post 1
-      </div>
-      <div>
+      </div >
+      <div className="item">
         post 2
       </div>
     </div>

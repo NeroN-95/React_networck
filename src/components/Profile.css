@@ -3,3 +3,7 @@
   grid-area: c;
   background-color: rgb(10, 226, 255);
 }
+
+.item{
+   color : greenyellow; 
+}
