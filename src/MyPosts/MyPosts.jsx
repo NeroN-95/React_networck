@@ -2,7 +2,7 @@ import React from 'react';
 import s from '../MyPosts/MyPosts.module.css';
 import Post from './Post/Post';
 
-const MyPosts = () => {
+const MyPosts = () => { 
   return (
 
     <div>
@@ -11,10 +11,12 @@ const MyPosts = () => {
         <textarea></textarea>
         <button>Add post</button>
       </div>
+      
       <div className={s.posts} >
+      <Post message="hi how are you?" LikesCount='0' />
+      <Post message="hi it's my post" LikesCount='23' />
       <Post />
-      <Post />
-      <Post />
+
       </div>
     </div>
 
