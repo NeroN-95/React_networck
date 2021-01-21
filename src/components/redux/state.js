@@ -1,54 +1,79 @@
-import {renderEntireTree} from "../../render";
+let store = {
 
+    _state: {
+        profilePage: {
+            posts: [
+                {id: 1, message: 'hi how are you?', likesCount: 11},
+                {id: 2, message: 'hi its my post', likesCount: 12},
+                {id: 3, message: 'blabla', likesCount: 10}
+            ],
+            newPostText: 'Samurai'
 
-let state = {
-    profilePage: {
-        posts : [
-    {id: 1, message: 'hi how are you?', likesCount: 11},
-    {id: 2, message: 'hi its my post', likesCount: 12},
-    {id: 3, message: 'blabla', likesCount: 10}
-],
-        newPostText : 'Samurai'
+        },
+        messagesPage: {
+            message: [
+                {id: 1, message: 'hi'},
+                {id: 2, message: 'how are you?'},
+                {id: 3, message: 'what are you think about your dream ?'},
+                {id: 4, message: 'ok'},
+                {id: 5, message: 'stay with...'}
+            ],
+            dialogs: [
+                {id: 1, name: 'Roma'},
+                {id: 2, name: 'Vlad'},
+                {id: 3, name: 'Kirill'},
+                {id: 4, name: 'Viktor'},
+                {id: 5, name: 'Alexandra'},
+                {id: 6, name: 'Oleh'}
+            ]
+        },
+        sidebar: {}
 
     },
-    messagesPage:{
-        message :  [
-        {id : 1, message: 'hi'},
-        {id : 2, message: 'how are you?'},
-        {id : 3, message: 'what are you think about your dream ?'},
-        {id : 4, message: 'ok'},
-        {id : 5, message: 'stay with...'}
-    ],
-        dialogs : [
-            {id : 1, name: 'Roma'},
-            {id : 2, name: 'Vlad'},
-            {id : 3, name: 'Kirill'},
-            {id : 4, name: 'Viktor'},
-            {id : 5, name: 'Alexandra'},
-            {id : 6, name: 'Oleh'}
-        ]
+    _callSubscriber() {
+        console.log('state changed');
     },
-    sidebar : {}
+    getState() {
+        return this._state;
+    },
+    subcribe(observer) {
 
+        this._callSubscriber = observer; // (паттерн наблюддатель  observer)
+    },
+    addPost() {
+        let newPost = {
+            id: 5,
+            message: this._state.profilePage.newPostText,
+            likesCount: 0
+        };
+        this._state.profilePage.posts.push(newPost);
+        this._state.profilePage.newPostText = '';
+        this._callSubscriber(this._state);
+    },
+    updateNewPostText(NewText) {
+
+        this._state.profilePage.newPostText = NewText;
+        this._callSubscriber(this._state);
+    },
+
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            let newPost = {
+                id: 5,
+                message: this._state.profilePage.newPostText,
+                likesCount: 0
+            };
+            this._state.profilePage.posts.push(newPost);
+            this._state.profilePage.newPostText = '';
+            this._callSubscriber(this._state);
+
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.NewText;
+            this._callSubscriber(this._state);
+        }
+    }
 }
-window.state = state ;
 
 
-export let addPost = () => {
-
-    let newPost = {
-        id : 5,
-        message: state.profilePage.newPostText,
-        likesCount : 0
-    };
-    state.profilePage.posts.push(newPost);
-    state.profilePage.newPostText= '';
-    renderEntireTree(state);
-}
-
-export let updateNewPostText = (NewText) => {
-    state.profilePage.newPostText = NewText;
-    renderEntireTree(state);
-}
-
-export default state;
+export default store;
+window.state = store;
