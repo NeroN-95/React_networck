@@ -5,16 +5,16 @@ import {connect} from "react-redux";
 
 
 let mapStateToProps = (state) => {
-return{
+   return {
     messagesPage:state.messagesPage
-}
+    }
 }
 let mapDispatchToProps = (dispatch) => {
-    return{
-        updateNewMessageBody:()=>{
-            dispatch(sendMessageCreator());
+    return {
+        sendMessage : () => {
+            dispatch(sendMessageCreator  ());
         },
-        sendMessage:(body)=>{
+        updateNewMessageBody  : (body) => {
             dispatch(updateNewMessageBodyCreator(body));
         }
     }
