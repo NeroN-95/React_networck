@@ -35,7 +35,7 @@ let initialState ={
                     newPostText : action.NewText
                 };
 
-             
+
             }
             default:
                 return state;
