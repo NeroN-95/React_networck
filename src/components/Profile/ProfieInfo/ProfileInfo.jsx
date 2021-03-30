@@ -1,8 +1,15 @@
 import React from 'react';
 import s from './ProfileInfo.module.css'
+import Preloader from "../../common/Preloader/Preloader";
 
 
-const ProfileInfo = () => {
+const ProfileInfo = (props) => {
+
+    if (!props.profile){
+        return <Preloader/>
+
+    }
+
     return (
 
         <div>
@@ -11,7 +18,7 @@ const ProfileInfo = () => {
                     src='https://img5.goodfon.ru/wallpaper/big/e/5c/beach-beautiful-beach-ocean-beach-palm-tree-tropical-beach.jpg'/>
             </div>
             <div className={s.descriptionBlock}>
-                ava + description
+                <img src={props.profile.photos.large}/>
             </div>
 
         </div>

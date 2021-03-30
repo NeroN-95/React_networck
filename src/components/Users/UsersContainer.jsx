@@ -10,7 +10,6 @@ import {
     unfollow
 } from "../redux/Users-reducer";
 import * as axios from "axios";
-import preloader from "../../assets/images/preloader.svg";
 import Preloader from "../common/Preloader/Preloader";
 
 
@@ -63,10 +62,6 @@ let mapStateToProps = (state) => {
         isFetching: state.usersPage.isFetching
     }
 }
-
-
-
-
 
 export default connect(mapStateToProps,
     {
